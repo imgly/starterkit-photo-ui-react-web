@@ -1,13 +1,14 @@
 /**
- * CE.SDK Photo UI Starterkit - React Entry Point
+ * CE.SDK Photo UI Starterkit - Entry Point
  *
- * A custom photo editing UI built with CE.SDK featuring crop, filters,
- * adjustments, and a mobile-optimized interface.
+ * Demonstrates a custom photo editing UI built with CE.SDK.
+ * Features crop, filters, adjustments, and a mobile-optimized interface.
  *
  * @see https://img.ly/docs/cesdk/js/getting-started/
  */
 
 import { createRoot } from 'react-dom/client';
+import type CreativeEngine from '@cesdk/engine';
 
 import App from './app/App';
 
@@ -16,29 +17,34 @@ import App from './app/App';
 // ============================================================================
 
 const engineConfig = {
-  // Unique user identifier for analytics (customize for your app)
   userId: 'starterkit-photo-ui-user',
-
-  // License key (required for production)
-  // license: 'YOUR_LICENSE_KEY',
-
-  // Base URL for CE.SDK assets (for self-hosted deployments)
-  // baseURL: '/assets/',
-
-  // Feature flags
   featureFlags: {
     preventScrolling: true
   }
 };
 
 // ============================================================================
-// Initialize React Application
+// Application Bootstrap
 // ============================================================================
 
-const container = document.getElementById('root');
-if (!container) {
-  throw new Error('Root container not found');
+async function main(): Promise<void> {
+  // Render application
+  const container = document.getElementById('root');
+  if (container == null) {
+    throw new Error('Root container not found');
+  }
+
+  createRoot(container).render(<App engineConfig={engineConfig} />);
 }
 
-const root = createRoot(container);
-root.render(<App engineConfig={engineConfig} />);
+main().catch((error) => {
+  // eslint-disable-next-line no-console
+  console.error('Failed to initialize application:', error);
+});
+
+// Debug access (remove in production)
+declare global {
+  interface Window {
+    cesdk?: CreativeEngine;
+  }
+}
