@@ -18,6 +18,7 @@ import {
 import { useSinglePageFocus } from '../../imgly/hooks/useSinglePageFocus';
 import { getImageSize } from '../../imgly/engine-utils';
 
+
 /**
  * Demo assets for this example (images, …) are loaded from
  * the IMG.LY CDN by default. To host them yourself, copy this kit's asset
@@ -27,7 +28,7 @@ import { getImageSize } from '../../imgly/engine-utils';
  */
 export const DEMO_ASSETS_BASE_URL: string =
   import.meta.env.VITE_DEMO_ASSETS_BASE_URL ||
-  'https://staticimgly.com/imgly/cesdk-web-examples-data/1.81.1/starterkit-photo-ui';
+  'https://staticimgly.com/imgly/cesdk-web-examples-data/1.82.0-rc.2/starterkit-photo-ui';
 
 const INITIAL_PORTRAIT_IMAGE_PATH = `${DEMO_ASSETS_BASE_URL}/images/mountains.jpg`;
 const INITIAL_LANDSCAPE_IMAGE_PATH = `${DEMO_ASSETS_BASE_URL}/images/woman.jpg`;
