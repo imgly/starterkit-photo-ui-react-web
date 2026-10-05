@@ -16,7 +16,7 @@ const CESDKCanvas = () => {
 
     container.append(canvas);
     return () => {
-      container.remove(canvas);
+      container.removeChild(canvas);
     };
   }, [engineIsLoaded, engine]);
 
