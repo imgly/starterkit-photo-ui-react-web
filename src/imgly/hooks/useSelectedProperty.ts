@@ -39,7 +39,11 @@ export function useProperty<T>(
     (...value: any[]) => {
       if (!engine || !block) return;
       try {
-        setProperty(engine, block, propertyName, ...value);
+        if (Array.isArray(value)) {
+          setProperty(engine, block, propertyName, ...value);
+        } else {
+          setProperty(engine, block, propertyName, value);
+        }
         if (options.shouldAddUndoStep) {
           engine.editor.addUndoStep();
         }
@@ -129,7 +133,11 @@ function setProperty(
     const setMethod = engine.block[
       typeDependentMethodName.set as 'setFloat' | 'setBool' | 'setString'
     ] as (...args: any[]) => void;
-    setMethod.call(engine.block, blockId, propertyName, ...values);
+    if (Array.isArray(values)) {
+      setMethod.call(engine.block, blockId, propertyName, ...values);
+    } else {
+      setMethod.call(engine.block, blockId, propertyName, values);
+    }
   }
 }
 

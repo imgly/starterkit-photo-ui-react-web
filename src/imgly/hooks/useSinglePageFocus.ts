@@ -7,7 +7,7 @@
 
 import type CreativeEngine from '@cesdk/engine';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { zoomToSelectedText } from '../../imgly/engine-utils';
+import { zoomToSelectedText } from '../engine-utils';
 
 interface UseSinglePageFocusOptions {
   zoomPaddingTopDefault?: number;
@@ -141,14 +141,13 @@ export function useSinglePageFocus({
     const isValid =
       currentPageBlockId && engine.block.isValid(currentPageBlockId);
     if (isValid) {
-      return engine.scene.zoomToBlock(currentPageBlockId, {
-        padding: {
-          left: zoomPaddingLeft,
-          top: zoomPaddingTop,
-          right: zoomPaddingRight,
-          bottom: zoomPaddingBottom
-        }
-      });
+      return engine.scene.zoomToBlock(
+        currentPageBlockId,
+        zoomPaddingLeft,
+        zoomPaddingTop,
+        zoomPaddingRight,
+        zoomPaddingBottom
+      );
     }
   }, [
     enabled,
@@ -167,14 +166,13 @@ export function useSinglePageFocus({
     const selectedBlock = engine.block.findAllSelected()[0];
     const isValid = selectedBlock && engine.block.isValid(selectedBlock);
     if (isValid) {
-      return engine.scene.zoomToBlock(selectedBlock, {
-        padding: {
-          left: zoomPaddingLeft,
-          top: zoomPaddingTop,
-          right: zoomPaddingRight,
-          bottom: zoomPaddingBottom
-        }
-      });
+      return engine.scene.zoomToBlock(
+        selectedBlock,
+        zoomPaddingLeft,
+        zoomPaddingTop,
+        zoomPaddingRight,
+        zoomPaddingBottom
+      );
     }
   }, [
     enabled,
@@ -210,6 +208,7 @@ export function useSinglePageFocus({
     } else {
       zoomToPage();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     engine,
     verticalTextScrollEnabled,
