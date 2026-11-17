@@ -15,12 +15,12 @@ export async function zoomToSelectedText(
   paddingTop = 0,
   paddingBottom = 0
 ): Promise<void> {
-  const canvasBounding = engine.element.getBoundingClientRect();
+  const canvasBounding = engine.element!.getBoundingClientRect();
   const canvasHeight = canvasBounding.height * window.devicePixelRatio;
   const overlapBottom = Math.max(
     (canvasBounding.top +
       canvasBounding.height -
-      window.visualViewport.height) *
+      window.visualViewport!.height) *
       window.devicePixelRatio,
     0
   );
@@ -59,16 +59,16 @@ export function pixelToCanvasUnit(
   pixel: number
 ): number {
   const sceneUnit = engine.block.getEnum(
-    engine.scene.get(),
+    engine.scene.get()!,
     'scene/designUnit'
   );
   let densityFactor = 1;
   if (sceneUnit === 'Millimeter') {
     densityFactor =
-      engine.block.getFloat(engine.scene.get(), 'scene/dpi') / 25.4;
+      engine.block.getFloat(engine.scene.get()!, 'scene/dpi') / 25.4;
   }
   if (sceneUnit === 'Inch') {
-    densityFactor = engine.block.getFloat(engine.scene.get(), 'scene/dpi');
+    densityFactor = engine.block.getFloat(engine.scene.get()!, 'scene/dpi');
   }
   return (
     pixel /
