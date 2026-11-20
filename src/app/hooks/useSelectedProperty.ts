@@ -106,8 +106,8 @@ const BLOCK_PROPERTY_METHODS = {
     set: 'setString'
   },
   Color: {
-    get: 'getColorRGBA',
-    set: 'setColorRGBA'
+    get: 'getColor',
+    set: 'setColor'
   },
   Enum: {
     get: 'getEnum',
